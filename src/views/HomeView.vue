@@ -3,10 +3,11 @@
     <h1 class="mt-5 mb-4">Product List</h1>
 
     <!-- Search Bar -->
-    <div class="mb-4">
-      <label for="search" class="form-label">Search Product:</label>
-      <input v-model="searchQuery" type="text" id="search" class="form-control" @input="searchProducts" />
-    </div>
+<div class="mb-4">
+  <label for="search" class="form-label">Search Product:</label>
+  <input v-model="searchQuery" type="text" id="search" class="form-control custom-search" @input="searchProducts" />
+</div>
+
 
     <div class="row">
       <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
@@ -32,7 +33,9 @@
           </li>
         </ul>
         <p><strong>Total Price: ${{ totalPrice.toFixed(2) }}</strong></p>
-      </div>
+           <!-- Confirm Shopping Cart button -->
+        <button v-if="cart.length > 0" @click="confirmShoppingCart" class="btn btn-success">Confirm Shopping Cart</button>
+      </div>  
     </div>
   </div>
 </template>
@@ -111,11 +114,23 @@ export default {
         product.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
+    confirmShoppingCart() {
+      // Add your logic to handle the confirmation of the shopping cart
+      alert("Shopping cart confirmed!");
+    },
   },
 };
 </script>
 
 <style scoped>
+
+.custom-search {
+  width: 300px; /* Set the desired width for the search bar */
+  border: 1px solid #ced4da; /* Add border style */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  padding: 8px; /* Add padding for better appearance */
+}
+
 .product-card {
   text-align: center;
   border: 1px solid #ccc;
