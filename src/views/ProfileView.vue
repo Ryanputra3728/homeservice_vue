@@ -2,6 +2,9 @@
   <div class="profile-container">
     <!-- Add the image from the assets folder -->
     <img src="@/assets/profile-picture.jpg" alt="My Profile Picture" class="profile-picture" />
+  </div>
+
+  <div class="profile-name">
     <h2>Mochammad Ryan Putra Hermawan</h2>
   </div>
 
@@ -64,14 +67,21 @@ export default {
 .profile-picture {
   max-width: 20%; /* Ensure the image does not exceed its natural size */
   height: auto; /* Maintain the aspect ratio of the image */
-  margin-top: 20px; /* Add spacing between the heading and the image */
+  margin-top: 75px; /* Add spacing between the heading and the image */
   border-radius: 50%;
+}
+
+.profile-name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 10vh; /* Adjust the height to your preference */
 }
 
 .social-media {
   display: flex;
   justify-content: center;
-  margin-top: -10px; /* Adjust spacing between profile and social media logos */
 }
 
 .social-logo {

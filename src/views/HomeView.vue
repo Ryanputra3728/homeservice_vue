@@ -3,11 +3,10 @@
     <h1 class="mt-5 mb-4">Product List</h1>
 
     <!-- Search Bar -->
-<div class="mb-4">
-  <label for="search" class="form-label">Search Product:</label>
-  <input v-model="searchQuery" type="text" id="search" class="form-control custom-search" @input="searchProducts" />
-</div>
-
+  <div class="mb-4">
+    <label for="search" class="form-label">Search Product:</label>
+    <input v-model="searchQuery" type="text" id="search" class="form-control custom-search" @input="searchProducts" />
+  </div>
 
     <div class="row">
       <div v-for="product in filteredProducts" :key="product.id" class="col-md-4">
@@ -75,24 +74,31 @@ export default {
       this.isHovered = value;
     },
     addToCart(product) {
-      const cartItem = this.cart.find((item) => item.id === product.id);
+  const cartItem = this.cart.find((item) => item.id === product.id);
 
-      if (cartItem) {
-        cartItem.quantity++;
-      } else {
-        if (product.stock > 0) {
-          this.cart.push({
-            id: product.id,
-            title: product.title,
-            price: product.price,
-            quantity: 1,
-          });
-          product.stock--;
-        } else {
-          alert("Product is out of stock");
-        }
-      }
-    },
+  if (cartItem) {
+    cartItem.quantity++;
+
+    // Decrement product stock based on the quantity added to the cart
+    const productInCart = this.products.find((p) => p.id === cartItem.id);
+    if (productInCart && productInCart.stock > 0) {
+      productInCart.stock--;
+    }
+  } else {
+    if (product.stock > 0) {
+      this.cart.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        quantity: 1,
+      });
+      product.stock--;
+    } else {
+      alert("Product is out of stock");
+    }
+  }
+}
+,
     removeOneFromCart(item) {
       const index = this.cart.indexOf(item);
       if (index !== -1) {
@@ -116,7 +122,7 @@ export default {
     },
     confirmShoppingCart() {
       // Add your logic to handle the confirmation of the shopping cart
-      alert("Shopping cart confirmed!");
+      alert("Your item has been confirmed");
     },
   },
 };
